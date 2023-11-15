@@ -18,6 +18,7 @@ let num1 = '';
 let num2 = '';
 let op = '';
 let displayText = num1 + ' ' + op + ' ' + num2;
+let lastPressed;
 
 const operate = function(num1, op, num2) {
     switch (op) {
@@ -45,9 +46,9 @@ num2 gets updated*/
 const numButtons = document.querySelectorAll('.number');
 for (let i = 0; i < numButtons.length; i++) {
     numButtons[i].addEventListener('click', () => {
-        if (op === '') {
+        if (op === '' && lastPressed !== 'equals') {
             num1 += numButtons[i].textContent;
-        } else {
+        } else if (lastPressed !== 'equals') {
             num2 += numButtons[i].textContent;
         }
         displayText = num1 + ' ' + op + ' ' + num2;
@@ -67,6 +68,7 @@ for (let i = 0; i < opButtons.length; i++) {
                 num2 = ''
             } 
             op = opButtons[i].textContent;
+            lastPressed = 'op';
             displayText = num1 + ' ' + op + num2;
             display.textContent = displayText;
         }
@@ -84,11 +86,15 @@ clearButton.addEventListener('click', () => {
 });  
 
 //Add Event Listener for Equals Button
-/*operate is called, the result is displaye, and variables
-are cleared.*/
+/*if a number or the operator is not provided, this does nothing. Otherwise, operate is called, the result is displayed, and variables are cleared.*/
 let equalsButton = document.querySelector('#equals');
 equalsButton.addEventListener('click', () => {
-    if (num1 === '') {num1 = 0};
-    if (num2 === '') {num2 = 0};
-    display.textContent = operate(num1, op, num2);
+    if (num1 !== '' && num2 !== '' && op !== '') {
+        console.log('This works!');
+        display.textContent = operate(num1, op, num2);
+        num1 = display.textContent;
+        num2 = '';
+        op = '';
+        lastPressed = 'equals';
+    };
 });  
