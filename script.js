@@ -15,7 +15,7 @@ const divide = function(a, b) {
 }
 
 let num1;
-let num2
+let num2;
 let op;
 
 const operate = function(num1, op, num2) {
