@@ -83,6 +83,7 @@ clearButton.addEventListener('click', () => {
     num1 = '';
     num2 = '';
     op = '';
+    lastPressed = 'clear';
 });  
 
 //Add Event Listener for Equals Button
