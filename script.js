@@ -14,6 +14,7 @@ const divide = function(a, b) {
     return a / b;
 }
 
+let input = '';
 let num1;
 let num2;
 let op;
@@ -34,3 +35,16 @@ const operate = function(num1, op, num2) {
             break;
     }
 }
+
+function addButtonListeners() {
+    const buttons = document.querySelectorAll('button');
+    console.log(buttons);
+    for (let i = 0; i < buttons.length; i++) {
+        buttons[i].addEventListener('click', () => {
+        input += buttons[i].textContent;
+        console.log(input);
+        })
+    }
+}
+
+addButtonListeners();
