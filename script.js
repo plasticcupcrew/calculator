@@ -77,7 +77,7 @@ for (let i = 0; i < opButtons.length; i++) {
             lastPressed = 'op';
             displayText = num1 + ' ' + op + num2;
             if (divideByZero === true) {
-                displayText = "Whoops! Can't divide by zero!";
+                displayText = "% zero no no!!";
                 num1 = '';
                 num2 = '';
                 op = '';
@@ -111,7 +111,7 @@ equalsButton.addEventListener('click', () => {
             op = '';
             lastPressed = 'equals';
         } else {
-            displayText = "Whoops! Can't divide by zero!"
+            displayText = "% zero no no!!"
             num1 = '';
             num2 = ''
             op = '';
