@@ -1,17 +1,22 @@
 const add = function(a, b) {
-    return +a + +b;
+    let result = +a + +b;
+    return result.toFixed(2);
 }
 
 const subtract = function(a, b) {
-    return a - b;
+    let result = a - b;
+    return result.toFixed(2);
 }
 
 const multiply = function(a, b) {
-    return a * b;
+    let result = a * b;
+    return result.toFixed(2);
 }
 
 const divide = function(a, b) {
-    return +a / +b;
+    let result = a / b;
+    if (+b === 0) {divideByZero = true};
+    return result.toFixed(2);
 }
 
 let num1 = '';
@@ -19,6 +24,7 @@ let num2 = '';
 let op = '';
 let displayText = num1 + ' ' + op + ' ' + num2;
 let lastPressed;
+let divideByZero = false;
 
 const operate = function(num1, op, num2) {
     switch (op) {
@@ -70,7 +76,14 @@ for (let i = 0; i < opButtons.length; i++) {
             op = opButtons[i].textContent;
             lastPressed = 'op';
             displayText = num1 + ' ' + op + num2;
+            if (divideByZero === true) {
+                displayText = "Whoops! Can't divide by zero!";
+                num1 = '';
+                num2 = '';
+                op = '';
+            } 
             display.textContent = displayText;
+            divideByZero = false;
         }
     });
 }
@@ -91,11 +104,20 @@ clearButton.addEventListener('click', () => {
 let equalsButton = document.querySelector('#equals');
 equalsButton.addEventListener('click', () => {
     if (num1 !== '' && num2 !== '' && op !== '') {
-        console.log('This works!');
-        display.textContent = operate(num1, op, num2);
-        num1 = display.textContent;
-        num2 = '';
-        op = '';
-        lastPressed = 'equals';
+        num1 = operate(num1, op, num2);
+        if (divideByZero === false) {
+            displayText = num1;
+            num2 = '';
+            op = '';
+            lastPressed = 'equals';
+        } else {
+            displayText = "Whoops! Can't divide by zero!"
+            num1 = '';
+            num2 = ''
+            op = '';
+        }
+        display.textContent = displayText;
+        console.log(divideByZero);
+        divideByZero = false;
     };
-});  
+});
